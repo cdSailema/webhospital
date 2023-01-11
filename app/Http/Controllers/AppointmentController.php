@@ -19,6 +19,7 @@ class AppointmentController extends Controller
     public function store(Request $request){
 
         $rules = [
+            'scheduled_date' => 'required',
             'scheduled_time' => 'required',
             'type' => 'required',
             'description' => 'required',
@@ -27,6 +28,7 @@ class AppointmentController extends Controller
         ];
 
         $messages = [
+            'scheduled_date.required' => 'Debe seleccionar una fecha para su cita.',
             'scheduled_time.required' => 'Debe seleccionar una hora para su cita.',
             'type.required' => 'Debe seleccionar el tipo de consulta.',
             'description.required' => 'Es necesario registrar sus síntomas.'

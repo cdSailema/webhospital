@@ -49,16 +49,16 @@ class HorarioController extends Controller
     return $data;
     }
 
-    private function getIntervalos($star, $end){
-        $star = new Carbon($star);
+    private function getIntervalos($start, $end){
+        $start = new Carbon($start);
         $end = new Carbon($end);
 
         $intervalos = [];
-        while($star < $end){
+        while($start < $end){
             $intervalo = [];
-            $intervalo['star'] = $star->format('g:i A');
-            $star->addMinutes(30);
-            $intervalo['end'] = $star->format('g:i A');
+            $intervalo['start'] = $start->format('g:i A');
+            $start->addMinutes(30);
+            $intervalo['end'] = $start->format('g:i A');
             $intervalos[]=$intervalo;
         }
         return $intervalos;

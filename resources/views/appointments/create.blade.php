@@ -56,18 +56,19 @@
             
 
             <div class="form-group">
-                <label for="date">Fecha</label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
-                    </div>
-                    <input class="form-control datepicker" 
-                    id="date" name="scheduled_date"
-                    
-                    placeholder="Seleccione la fecha" 
-                    type="text" value="{{ date('Y-m-d')}}" data-date-format="yyyy-mm-dd"
-                    data-date-star-date="{{ date('Y-m-d') }}" data-date-end-date="+30d">
-                </div>
+              <label for="date">Fecha</label>
+              <div class="input-group">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                  </div>
+                  <input class="form-control datepicker"
+                  id="date" name="scheduled_date"
+                  placeholder="Seleccionar fecha" 
+                  type="date" value="{{ old('scheduled_date'), date('Y-m-d') }}" 
+                  data-date-format="yyyy-mm-dd"
+                  data-date-start-date="{{ date('Y-m-d') }}" 
+                  data-date-end-date="+30d">
+              </div>
             </div>
 
             <div class="form-group">

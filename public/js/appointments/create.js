@@ -49,7 +49,6 @@ function loadHours() {
 }
 
 function displayHours(data){
-    console.log(data);
     let htmlHoursM = '';
     let htmlHoursA = '';
 
