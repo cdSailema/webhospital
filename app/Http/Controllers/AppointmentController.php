@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Interfaces\HorarioServiceInterface;
+use App\Models\CancelledAppointment;
 use App\Models\CitasMedicas;
 use App\Models\Specialty;
 use Carbon\Carbon;
@@ -12,19 +13,45 @@ use Illuminate\Support\Facades\Validator;
 class AppointmentController extends Controller
 {
     
-    public function index(){       
-        
-        $confirmedAppointments = CitasMedicas::all()
-            ->where('status', 'Confirmada')
-            ->where('patient_id', auth()->id());
-        $pendingAppointments = CitasMedicas::all()
-            ->where('status', 'Reservada')
-            ->where('patient_id', auth()->id());
-        $oldAppointments = CitasMedicas::all()
-            ->whereIn('status', ['Atendida','Cancelada'])
-            ->where('patient_id', auth()->id());
+    public function index(){  
 
-        return view('appointments.index', compact('confirmedAppointments', 'pendingAppointments', 'oldAppointments'));
+        $role = auth()->user()->role;
+        
+        if($role == 'admin'){
+            //Consultas para Administrador
+            $confirmedAppointments = CitasMedicas::all()
+                ->where('status', 'Confirmada');                
+            $pendingAppointments = CitasMedicas::all()
+                ->where('status', 'Reservada');               
+            $oldAppointments = CitasMedicas::all()
+                ->whereIn('status', ['Atendida','Cancelada']);               
+        
+        }elseif($role == 'doctor'){
+            //Consultas para médicos
+            $confirmedAppointments = CitasMedicas::all()
+                ->where('status', 'Confirmada')
+                ->where('doctor_id', auth()->id());
+            $pendingAppointments = CitasMedicas::all()
+                ->where('status', 'Reservada')
+                ->where('doctor_id', auth()->id());
+            $oldAppointments = CitasMedicas::all()
+                ->whereIn('status', ['Atendida','Cancelada'])
+                ->where('doctor_id', auth()->id());
+
+        }elseif($role == 'paciente'){
+            //Consultas para pacientes
+            $confirmedAppointments = CitasMedicas::all()
+                ->where('status', 'Confirmada')
+                ->where('patient_id', auth()->id());
+            $pendingAppointments = CitasMedicas::all()
+                ->where('status', 'Reservada')
+                ->where('patient_id', auth()->id());
+            $oldAppointments = CitasMedicas::all()
+                ->whereIn('status', ['Atendida','Cancelada'])
+                ->where('patient_id', auth()->id());
+        }      
+
+        return view('appointments.index', compact('confirmedAppointments', 'pendingAppointments', 'oldAppointments', 'role'));
     }
 
     public function create(HorarioServiceInterface $horarioServiceInterface){
@@ -112,4 +139,47 @@ class AppointmentController extends Controller
     $notification = 'La cita médica se ha registrado exitosamente.';
     return back()->with(compact('notification'));
     }
+
+    public function cancel(CitasMedicas $appointment, Request $request) {
+
+        if($request->has('justification')){
+            $cancellation = new CancelledAppointment();
+            $cancellation->justification = $request->input('justification');
+            $cancellation->cancelled_by_id = auth()->id();
+
+            $appointment->cancellation()->save($cancellation);
+
+        }
+
+        $appointment->status = 'Cancelada';
+        $appointment->save();
+        $notification = 'La cita se ha cancelado correctamente.';
+
+        return redirect('/miscitas')->with(compact('notification'));
+    }
+
+    public function confirm(CitasMedicas $appointment) {
+
+        $appointment->status = 'Confirmada';
+        $appointment->save();
+        $notification = 'La cita médica ha sido confirmada.';
+
+        return redirect('/miscitas')->with(compact('notification'));
+    }
+
+    public function formCancel(CitasMedicas $appointment) {
+
+        if($appointment->status == 'Confirmada'){
+            $role = auth()->user()->role;
+            return view('appointments.cancel', compact('appointment', 'role'));
+        }
+        return  redirect('/miscitas');    
+    }
+
+    public function show(CitasMedicas $appointment){
+        $role = auth()->user()->role;
+        return view('appointments.show', compact('appointment', 'role'));
+    }
+
+
 }

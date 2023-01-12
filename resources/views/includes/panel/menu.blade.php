@@ -31,6 +31,12 @@
           <i class="fas fa-bed text-warning"></i> Pacientes
         </a>
       </li>
+
+      <li class="nav-item">
+        <a class="nav-link text-default" href="/miscitas">
+          <i class="fas fa-clock text-info"></i> Citas médicas
+        </a>
+      </li>
   
   @elseif(auth()->user()->role == 'doctor')
 
@@ -41,7 +47,7 @@
   </li>
 
   <li class="nav-item">
-    <a class="nav-link text-default" href="">
+    <a class="nav-link text-default" href="/miscitas">
       <i class="fas fa-clock text-info"></i> Mi citas
     </a>
   </li>
