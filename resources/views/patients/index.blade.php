@@ -76,7 +76,7 @@
                     @csrf
                     @method('DELETE')
                     <a href="{{ url('/pacientes/'.$paciente->id.'/edit')}}" class="btn btn-sm btn-default">Editar</a>
-                    <button type="submit" class="btn btn-sm btn-danger">Eliminar</a>
+                    <button type="submit" class="btn btn-sm btn-danger">Eliminar</button >
                   </form>
                   
                 </td>

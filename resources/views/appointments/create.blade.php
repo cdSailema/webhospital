@@ -40,17 +40,24 @@
                 <select name="specialty_id" id="specialty" class="form-control">
                       <option value="">Seleccione la especialidad</option>
                       @foreach ($specialties as $especialidad)
-                          <option value="{{ $especialidad->id }}">{{ $especialidad->nombre }}
+                          <option value="{{ $especialidad->id }}"
+                          @if (old('specialty_id')== $especialidad->id) selected @endif> 
+                              {{ $especialidad->nombre }}
                           </option>                            
                       @endforeach  
                 </select> 
               </div>
 
               <div class="form-group col-md-6">
-                  <label for="doctor">Médico</label>
-                  <select name="doctor_id" id="doctor" class="form-control" required>
-                  </select> 
-              </div>
+                <label for="doctor">Médico</label>
+                <select name="doctor_id" id="doctor" class="form-control" required>
+                    @foreach ($doctors as $doctor)
+                    <option value="{{ $doctor->id }}"
+                        @if(old('doctor_id') == $doctor->id) selected @endif>
+                        {{ $doctor->name }}</option>
+                    @endforeach  
+                </select>
+            </div>
 
             </div>
             
@@ -72,26 +79,49 @@
             </div>
 
             <div class="form-group">
-                <label for="hours">Horario de atención</label>
-                <div class="container"> 
-                    <div class="row">
-                        <div class="col">
-                            <h4 class="m-3" id="titleMorning"></h4>
-                            <div id="hoursMorning">
-                                <mark>  
-                                    <small class="text-warning display-5">
-                                        Seleccione la especialidad, médico y fecha para ver horario disponible.
-                                    </small>
-                                </mark>
-                            </div>
-                        </div>
-                        <div class="col">
+              <label for="hours">Hora de atención</label>
+              <div class="container">
+                  <div class="row">
+                      <div class="col">
+                          <h4 class="m-3" id="titleMorning"></h4>
+                          <div id="hoursMorning">
+                              
+                            @if($intervals)
+                                  <h4 class="m-3">En la mañana</h4>
+                                  @foreach ($intervals['morning'] as $key => $interval)
+                                      <div class="custom-control custom-radio mb-3">
+                                      <input type="radio" id="intervalMorning{{ $key }}" name="scheduled_time" value="{{ $interval['start'] }}" class="custom-control-input">
+                                      <label class="custom-control-label" for="intervalMorning{{ $key }}">{{ $interval['start'] }} - {{ $interval['end'] }}</label>
+                                      </div>
+                                  @endforeach
+                              @else
+                                  <mark>
+                                      <small class="text-warning display-5">
+                                          Selecciona un médico y una fecha, para ver las horas.
+                                      </small>
+                                  </mark>
+                              @endif
+                          
+                          </div>
+                      </div>
+                      <div class="col">
                           <h4 class="m-3" id="titleAfternoon"></h4>
-                          <div id="hoursAfternoon"></div>
-                        </div>
-                    </div>
-                </div>                
-            </div>
+                          <div id="hoursAfternoon">
+                              @if($intervals)
+                                  <h4 class="m-3">En la tarde</h4>
+                                  @foreach ($intervals['afternoon'] as $key => $interval)
+                                      <div class="custom-control custom-radio mb-3">
+                                      <input type="radio" id="intervalAfternoon{{ $key }}" name="scheduled_time" value="{{ $interval['start'] }}" class="custom-control-input">
+                                      <label class="custom-control-label" for="intervalAfternoon{{ $key }}">{{ $interval['start'] }} - {{ $interval['end'] }}</label>
+                                      </div>
+                                  @endforeach
+                              @endif 
+                          </div>
+                      </div>
+
+                  </div>
+              </div>
+          </div>
 
             <div class="form-group">
                 <label>Tipo de consulta</label>
