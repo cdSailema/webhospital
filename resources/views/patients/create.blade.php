@@ -33,7 +33,8 @@
           
           <form action="{{ url('/pacientes')}}" method="POST">
             @csrf
-              <div class="form-group">
+              
+            <div class="form-group">
                   <label for="cedula">Número de cedula</label>
                   <input type="text" name="cedula" class="form-control" value="{{ old ('cedula')}}"required>
               </div>

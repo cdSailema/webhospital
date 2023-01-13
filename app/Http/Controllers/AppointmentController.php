@@ -137,7 +137,7 @@ class AppointmentController extends Controller
     //Modelo Appointment
     CitasMedicas::create($data);
     $notification = 'La cita médica se ha registrado exitosamente.';
-    return back()->with(compact('notification'));
+    return redirect('/miscitas')->with(compact('notification'));
     }
 
     public function cancel(CitasMedicas $appointment, Request $request) {

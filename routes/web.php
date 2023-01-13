@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
@@ -25,6 +25,10 @@ Route::middleware(['auth','admin'])->group(function() {
 
         //Rutas Pacientes
         Route::resource('pacientes', 'App\Http\Controllers\admin\PatientController');
+
+        //Rutas Reportes
+        Route::get('/reportes/citas/line', [App\Http\Controllers\admin\ChartController::class, 'appointments']);
+
 });
 
 Route::middleware(['auth','doctor'])->group(function() {
