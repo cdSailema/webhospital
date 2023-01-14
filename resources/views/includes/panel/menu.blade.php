@@ -36,7 +36,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link text-default" href="#">
+      <a class="nav-link text-default" href="{{ url('/reportes/doctors/column') }}">
         <i class="ni ni-chart-bar-32 text-warning"></i> Reportes Médicos
       </a>
     </li>
