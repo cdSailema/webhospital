@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Specialty;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -25,10 +26,16 @@ class SpecialtiesTablesSeeder extends Seeder
             'Dermatología',
             'Neurología'
         ];
-        foreach ($specialties as $specialty){
-            Specialty::create([
-                'nombre' => $specialty
+        foreach ($specialties as $specialtyName){
+            $specialty = Specialty::create([
+                'nombre' => $specialtyName
             ]);
+            $specialty->users()->saveMany(
+                User::factory(3)->state(['role' => 'doctor'])->make()
+
+            );
+                
         }
+        User::find(3)->specialties()->save($specialty);
     }
 }

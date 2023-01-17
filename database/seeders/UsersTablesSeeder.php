@@ -19,7 +19,7 @@ class UsersTablesSeeder extends Seeder
             'cedula' => '1804147047', 
             'name'=> 'Admin', 
             'surname'=> 'Admin', 
-            'email'=> 'admin1@gmail.com', 
+            'email'=> 'admin5@gmail.com', 
             'email_verified_at' => now(),
             'password'=> bcrypt('12345678'), // password
             'phone'=> '0991726362', 
@@ -31,10 +31,10 @@ class UsersTablesSeeder extends Seeder
         ]);
 
         User::create([
-            'cedula' => '1804147047', 
+            'cedula' => '1804147045', 
             'name'=> 'Medico1', 
             'surname'=> 'Medico1', 
-            'email'=> 'medico1@gmail.com', 
+            'email'=> 'medico5@gmail.com', 
             'email_verified_at' => now(),
             'password'=> bcrypt('12345678'), // password
             'phone'=> '0991726362', 
@@ -46,10 +46,10 @@ class UsersTablesSeeder extends Seeder
         ]);
 
         User::create([
-            'cedula' => '1804147047', 
+            'cedula' => '1804147046', 
             'name'=> 'Paciente1', 
             'surname'=> 'Paciente1', 
-            'email'=> 'paciente1@gmail.com', 
+            'email'=> 'paciente5@gmail.com', 
             'email_verified_at' => now(),
             'password'=> bcrypt('12345678'), // password
             'phone'=> '0991726362', 
@@ -59,5 +59,10 @@ class UsersTablesSeeder extends Seeder
             'gender'=> 'Masculino', 
             'role'=> 'paciente', 
         ]);
+
+        User::factory()
+            ->count(20)
+            ->state(['role'=>'paciente'])
+            ->create();
     }
 }

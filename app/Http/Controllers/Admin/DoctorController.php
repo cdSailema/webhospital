@@ -13,7 +13,7 @@ class DoctorController extends Controller
     
     public function index()
     {
-        $doctors = User::doctors()->get();
+        $doctors = User::doctors()->paginate(5);
         return view('doctors.index', compact('doctors'));
     }
    
