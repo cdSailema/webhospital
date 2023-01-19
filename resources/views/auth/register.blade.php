@@ -102,7 +102,11 @@
                 data-date-format="yyyy-mm-dd" >
             </div>            
               
-              <div class="form-group">
+            <div class="form-row ">
+              
+            <div class="form-group col-md-6">
+              <br>  
+              <label for="">Contraseña:</label>
                 <div class="input-group input-group-alternative">
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="ni ni-lock-circle-open text-default"></i></span>
@@ -112,7 +116,9 @@
               </div>
               
               
-              <div class="form-group">
+              <div class="form-group col-md-6">
+                <br>  
+                <label for="">Confirmar contraseña:</label>
                 <div class="input-group input-group-alternative">
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="ni ni-lock-circle-open text-default"></i></span>
@@ -120,6 +126,7 @@
                   <input class="form-control" placeholder="Confirmar contraseña" type="password" name="password_confirmation" required autocomplete="new-password" >
                 </div>
               </div>
+            </div>
               
               <div class="text-center">
                 <button type="submit" class="btn btn-default mt-4">Registrarse</button>

@@ -26,6 +26,12 @@ Route::middleware(['auth','admin'])->group(function() {
         //Rutas Pacientes
         Route::resource('pacientes', 'App\Http\Controllers\admin\PatientController');
 
+        //Rutas Enfermedades
+        Route::resource('enfermedades', 'App\Http\Controllers\EnfermedadesController');
+        
+        //Rutas Medicamentos
+        Route::resource('medicamentos', 'App\Http\Controllers\MedicamentosController');
+
         //Rutas Reportes
         Route::get('/reportes/citas/line', [App\Http\Controllers\admin\ChartController::class, 'appointments']);
        

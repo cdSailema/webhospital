@@ -23,12 +23,13 @@ class ChartController extends Controller
             ->groupBy('month')
             ->get()
             ->toArray();
+        
         $counts = array_fill(0, 12, 0);
         foreach($monthCounts as $monthCount){
             $index = $monthCount['month']-1;
             $counts[$index] = $monthCount['count'];
         }
-
+       
         return view('charts.appointments', compact('counts', 'end', 'start'));
         }
 
