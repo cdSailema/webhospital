@@ -58,9 +58,13 @@
                 Ver
               </a>
             @endif
+
+            <a href="{{ url('/miscitas/'.$cita->id.'/attend')}}" class="btn btn-sm btn-success" title="Atender cita">
+              Atender 
+            </a> 
             
               <a href="{{ url('/miscitas/'.$cita->id.'/cancel')}}" class="btn btn-sm btn-danger" title="Cancelar cita">
-                Cancelar
+                Cancelar 
               </a> 
           </td>
           

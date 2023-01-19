@@ -181,5 +181,18 @@ class AppointmentController extends Controller
         return view('appointments.show', compact('appointment', 'role'));
     }
 
+    public function attend(CitasMedicas $appointment) {
+        $appointment->status='Atendida';
+        $appointment->save();
+        $notification='La cita fue atendida.';
+        
+        return back()->with(compact('notification'));
+        }
 
+    public function formAttend(CitasMedicas $appointment) {
+
+        
+            return view('appointments.attend', compact('appointment'));
+        
+    }
 }

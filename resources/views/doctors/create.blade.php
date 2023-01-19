@@ -17,11 +17,13 @@
             <div class="col">
               <h3 class="mb-0">Nuevo médico</h3>
             </div>
+            
             <div class="col text-right">
               <a href="{{ url('/medicos')}}" class="btn btn-sm btn-success">
                 <i class="fas fa-chevron-left"></i>
                 Regresar</a>
             </div>
+          
           </div>
         </div>
        

@@ -28,10 +28,14 @@ Route::middleware(['auth','admin'])->group(function() {
 
         //Rutas Reportes
         Route::get('/reportes/citas/line', [App\Http\Controllers\admin\ChartController::class, 'appointments']);
+       
+        //Rutas Reportes Citas Medicos
         Route::get('/reportes/doctors/column', [App\Http\Controllers\admin\ChartController::class, 'doctors']);
-
         Route::get('/reportes/doctors/column/data', [App\Http\Controllers\admin\ChartController::class, 'doctorsJson']);
 
+        //Rutas Reportes Especialidades
+        Route::get('/reportes/specialties/column', [App\Http\Controllers\admin\ChartController::class, 'specialties']);
+        Route::get('/reportes/specialties/column/data', [App\Http\Controllers\admin\ChartController::class, 'specialtiesJson']);
 });
 
 Route::middleware(['auth','doctor'])->group(function() {
@@ -45,9 +49,15 @@ Route::middleware('auth')->group(function(){
     Route::get('/reservarcitas/create', [App\Http\Controllers\AppointmentController::class, 'create']);
     Route::post('/reservarcitas', [App\Http\Controllers\AppointmentController::class, 'store']);
     Route::get('/miscitas', [App\Http\Controllers\AppointmentController::class, 'index']);
+    
+    //Rutas Cancelar Cita
     Route::post('/miscitas/{appointment}/cancel', [App\Http\Controllers\AppointmentController::class, 'cancel']);
     Route::get('/miscitas/{appointment}/cancel', [App\Http\Controllers\AppointmentController::class, 'formCancel']);
     
+    //Rutas Atender Cita
+    Route::post('/miscitas/{appointment}/attend', [App\Http\Controllers\AppointmentController::class, 'attend']);
+    Route::get('/miscitas/{appointment}/attend', [App\Http\Controllers\AppointmentController::class, 'formAttend']);
+
     //Ruta Confirmar cita
     Route::post('/miscitas/{appointment}/confirm', [App\Http\Controllers\AppointmentController::class, 'confirm']);
     Route::get('/miscitas/{appointment}', [App\Http\Controllers\AppointmentController::class, 'show']);

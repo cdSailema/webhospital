@@ -6,7 +6,7 @@
             <div class="card-header border-0">
                 <div class="row align-items-center">
                     <div class="col">
-                        <h3 class="mb-0">Reporte: Frecuencia de citas</h3>
+                        <h3 class="mb-0">Reporte: Especialidades</h3>
                         
                         <div class="col text-right">
                             <a href="{{ url('/medicos')}}" class="btn btn-sm btn-success">
@@ -43,9 +43,14 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>   
                
                 <div id="container">
+                    <div class="col text-right">
+                        <a href="{{ url('/medicos')}}" class="btn btn-sm btn-success">
+                          <i class="fas fa-print"></i>
+                          PDF</a>
+                    </div>
 
                 </div>
             </div>
@@ -54,42 +59,10 @@
 @endsection
 
 @section('scripts')
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <script src="https://code.highcharts.com/modules/export-data.js"></script>
-    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-    <script src="{{ asset('js/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}} "></script>
-
-    <script>
-        Highcharts.chart('container', {
-            chart: {
-                type: 'line'
-            },
-            title: {
-                text: 'Citas registradas mensualmente'
-            },
-            xAxis: {
-                categories: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 
-                'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
-            },
-            yAxis: {
-                title: {
-                    text: 'Cantidad de citas'
-                }
-            },
-            plotOptions: {
-                line: {
-                    dataLabels: {
-                        enabled: true
-                    },
-                    enableMouseTracking: false
-                }
-            },
-            series: [{
-                name: 'Citas registradas',
-                data: @json($counts)
-            }]
-        });
-
-    </script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script src="{{ asset('js/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}} "></script>
+<script src="{{ asset('js/charts/specialties.js') }}" ></script>
 @endsection

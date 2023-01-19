@@ -42,10 +42,9 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link text-default" href="#">
+      <a class="nav-link text-default" href="{{ url('/reportes/specialties/column') }}">
         <i class="ni ni-chart-bar-32 text-warning"></i> Reporte Especialidades Citas
       </a>
     </li>
-    
   </ul>
   @endif
