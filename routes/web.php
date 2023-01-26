@@ -26,12 +26,6 @@ Route::middleware(['auth','admin'])->group(function() {
         //Rutas Pacientes
         Route::resource('pacientes', 'App\Http\Controllers\admin\PatientController');
 
-        //Rutas Enfermedades
-        Route::resource('enfermedades', 'App\Http\Controllers\EnfermedadesController');
-        
-        //Rutas Medicamentos
-        Route::resource('medicamentos', 'App\Http\Controllers\MedicamentosController');
-
         //Rutas Reportes
         Route::get('/reportes/citas/line', [App\Http\Controllers\admin\ChartController::class, 'appointments']);
        
@@ -64,6 +58,8 @@ Route::middleware('auth')->group(function(){
     Route::post('/miscitas/{appointment}/attend', [App\Http\Controllers\AppointmentController::class, 'attend']);
     Route::get('/miscitas/{appointment}/attend', [App\Http\Controllers\AppointmentController::class, 'formAttend']);
 
+    Route::post('/atendercitas', [App\Http\Controllers\AppointmentController::class, 'storeAttend']);
+
     //Ruta Confirmar cita
     Route::post('/miscitas/{appointment}/confirm', [App\Http\Controllers\AppointmentController::class, 'confirm']);
     Route::get('/miscitas/{appointment}', [App\Http\Controllers\AppointmentController::class, 'show']);
@@ -72,4 +68,3 @@ Route::middleware('auth')->group(function(){
     Route::get('/especialidades/{specialty}/medicos', [App\Http\Controllers\Api\SpecialtyController::class, 'doctors']);
     Route::get('/horario/horas', [App\Http\Controllers\Api\HorarioController::class, 'hours']);
 });
-

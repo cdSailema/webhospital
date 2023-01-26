@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Interfaces\HorarioServiceInterface;
 use App\Models\CancelledAppointment;
 use App\Models\CitasMedicas;
+use App\Models\Enfermedades;
+use App\Models\Medicamentos;
 use App\Models\Specialty;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -190,9 +192,22 @@ class AppointmentController extends Controller
         }
 
     public function formAttend(CitasMedicas $appointment) {
-
+            $enfermedades = Enfermedades::all();
+            $medicamentos = Medicamentos::all();        
+            return view('appointments.attend', compact('appointment', 'enfermedades', 'medicamentos'));
         
-            return view('appointments.attend', compact('appointment'));
+    }
+
+    public function storeAttend(Request $request){
+
+        $data =$request->only([
+            'diagnostic',
+            'enfermedad_id',
+            'medicamento_id',
+            'indications',
+            'nextAppointment'
+        ]);
+
         
     }
 }
